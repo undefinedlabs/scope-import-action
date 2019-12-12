@@ -5,6 +5,9 @@ inputs:
   dsn:
     description: 'Scope DSN'
     required: true
+  path:
+    description: 'Path to JUnit XML reports folder'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
