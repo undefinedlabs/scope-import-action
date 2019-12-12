@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/undefinedlabs/scope-for-junit-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.0",
+    "@actions/exec": "^1.0.2",
+    "@types/node": "^12.12.17"
   }
 }
