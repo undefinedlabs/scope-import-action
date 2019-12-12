@@ -1,0 +1,26 @@
+{
+  "name": "scope-for-junit-action",
+  "version": "1.0.0",
+  "description": "scope for junit reports action",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "release": "ncc build lib/scope-for-junit.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undefinedlabs/scope-for-junit-action.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/undefinedlabs/scope-for-junit-action/issues"
+  },
+  "homepage": "https://github.com/undefinedlabs/scope-for-junit-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0"
+  }
+}
