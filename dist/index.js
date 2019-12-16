@@ -1128,17 +1128,33 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path = __importStar(__webpack_require__(622));
 const core = __importStar(__webpack_require__(310));
 const exec = __importStar(__webpack_require__(230));
+const IS_WINDOWS = process.platform === 'win32';
+let tempDirectory = process.env['RUNNER_TEMP'] || '';
+if (!tempDirectory) {
+    let baseLocation;
+    if (IS_WINDOWS) {
+        // On windows use the USERPROFILE env variable
+        baseLocation = process.env['USERPROFILE'] || 'C:\\';
+    }
+    else {
+        baseLocation = (process.platform === 'darwin') ? '/Users' : '/home';
+    }
+    tempDirectory = path.join(baseLocation, 'actions', 'temp');
+}
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let dsn = core.getInput("dsn", { required: true });
-            core.exportVariable("SCOPE_DSN", dsn);
-            let path = core.getInput("path", { required: true });
-            yield exec.exec("go get github.com/go-training/helloworld");
-            yield exec.exec("go install github.com/go-training/helloworld");
-            yield exec.exec("./helloworld");
+            yield core.exportVariable("SCOPE_DSN", dsn);
+            let pathVar = core.getInput("path", { required: true });
+            yield core.exportVariable("GOBIN", tempDirectory);
+            yield exec.exec("go get github.com/undefinedlabs/scope-junit");
+            yield exec.exec("go install github.com/undefinedlabs/scope-junit");
+            const scopeJUnitTool = (IS_WINDOWS) ? "scope-junit.exe" : "scope-junit";
+            yield exec.exec(tempDirectory + "/" + scopeJUnitTool + " --path " + pathVar);
         }
         catch (error) {
             core.setFailed(error.message);
