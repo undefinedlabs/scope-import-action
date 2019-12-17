@@ -2,6 +2,8 @@ import * as path from "path";
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 
+const SCOPE_JUNIT_VERSION = "0.1.0";
+
 const IS_WINDOWS = process.platform === 'win32';
 let tempDirectory = process.env['RUNNER_TEMP'] || '';
 
@@ -24,8 +26,9 @@ async function run() {
 
         let pathVar = core.getInput("path", {required: true});
 
+        await core.exportVariable("GO111MODULE", "on");
         await core.exportVariable("GOBIN", tempDirectory);
-        await exec.exec("go get github.com/undefinedlabs/scope-junit");
+        await exec.exec("go get github.com/undefinedlabs/scope-junit@"+SCOPE_JUNIT_VERSION);
         await exec.exec("go install github.com/undefinedlabs/scope-junit");
 
         const scopeJUnitTool = (IS_WINDOWS) ? "scope-junit.exe":"scope-junit";

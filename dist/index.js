@@ -1131,6 +1131,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path = __importStar(__webpack_require__(622));
 const core = __importStar(__webpack_require__(310));
 const exec = __importStar(__webpack_require__(230));
+const SCOPE_JUNIT_VERSION = "0.1.0";
 const IS_WINDOWS = process.platform === 'win32';
 let tempDirectory = process.env['RUNNER_TEMP'] || '';
 if (!tempDirectory) {
@@ -1150,8 +1151,9 @@ function run() {
             let dsn = core.getInput("dsn", { required: true });
             yield core.exportVariable("SCOPE_DSN", dsn);
             let pathVar = core.getInput("path", { required: true });
+            yield core.exportVariable("GO111MODULE", "on");
             yield core.exportVariable("GOBIN", tempDirectory);
-            yield exec.exec("go get github.com/undefinedlabs/scope-junit");
+            yield exec.exec("go get github.com/undefinedlabs/scope-junit@" + SCOPE_JUNIT_VERSION);
             yield exec.exec("go install github.com/undefinedlabs/scope-junit");
             const scopeJUnitTool = (IS_WINDOWS) ? "scope-junit.exe" : "scope-junit";
             yield exec.exec(tempDirectory + "/" + scopeJUnitTool + " --path " + pathVar);
