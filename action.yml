@@ -1,6 +1,6 @@
 name: 'Scope for Junit'
 author: 'Daniel Rodriguez <@drodriguezhdez> | UndefinedLabs'
-description: 'Send JUnit XML reports to Scope'
+description: 'Import your JUnit XML reports to Scope'
 inputs:
   dsn:
     description: 'Scope DSN'
