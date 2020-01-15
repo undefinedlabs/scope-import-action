@@ -34,7 +34,7 @@ module.exports =
 /******/ 	// the startup function
 /******/ 	function startup() {
 /******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(797);
+/******/ 		return __webpack_require__(122);
 /******/ 	};
 /******/
 /******/ 	// run startup
@@ -1649,6 +1649,59 @@ function coerce (version, options) {
     '.' + (match[3] || '0') +
     '.' + (match[4] || '0'), options)
 }
+
+
+/***/ }),
+
+/***/ 122:
+/***/ (function(__unusedmodule, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const core = __importStar(__webpack_require__(310));
+const exec = __importStar(__webpack_require__(230));
+const tc = __importStar(__webpack_require__(602));
+const io = __importStar(__webpack_require__(954));
+const IS_WINDOWS = process.platform === 'win32';
+const IS_MACOS = process.platform === 'darwin';
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            let dsn = core.getInput("dsn", { required: true });
+            yield core.exportVariable("SCOPE_DSN", dsn);
+            let pathVar = core.getInput("path", { required: true });
+            const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
+            let scopeImportToolPath;
+            scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" + platform + "/x86_64");
+            if (IS_WINDOWS && !scopeImportToolPath.endsWith(".exe")) {
+                yield io.mv(scopeImportToolPath, scopeImportToolPath + ".exe");
+                scopeImportToolPath = scopeImportToolPath + ".exe";
+            }
+            yield exec.exec(scopeImportToolPath + " --path " + pathVar);
+        }
+        catch (error) {
+            core.setFailed(error.message);
+        }
+    });
+}
+run();
 
 
 /***/ }),
@@ -3697,59 +3750,6 @@ var crypto = __webpack_require__(417);
 module.exports = function nodeRNG() {
   return crypto.randomBytes(16);
 };
-
-
-/***/ }),
-
-/***/ 797:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const core = __importStar(__webpack_require__(310));
-const exec = __importStar(__webpack_require__(230));
-const tc = __importStar(__webpack_require__(602));
-const io = __importStar(__webpack_require__(954));
-const IS_WINDOWS = process.platform === 'win32';
-const IS_MACOS = process.platform === 'darwin';
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            let dsn = core.getInput("dsn", { required: true });
-            yield core.exportVariable("SCOPE_DSN", dsn);
-            let pathVar = core.getInput("path", { required: true });
-            const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
-            let scopeImportToolPath;
-            scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" + platform + "/x86_64");
-            if (IS_WINDOWS && !scopeImportToolPath.endsWith(".exe")) {
-                yield io.mv(scopeImportToolPath, scopeImportToolPath + ".exe");
-                scopeImportToolPath = scopeImportToolPath + ".exe";
-            }
-            yield exec.exec(scopeImportToolPath + " --path " + pathVar);
-        }
-        catch (error) {
-            core.setFailed(error.message);
-        }
-    });
-}
-run();
 
 
 /***/ }),

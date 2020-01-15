@@ -15,7 +15,7 @@ GitHub Action to import your tests reports to [Scope](https://scope.dev)
 
 ```yml
   - name: Scope Importer
-    uses: undefinedlabs/scope-importer-action@v1
+    uses: undefinedlabs/scope-import-action@v1
     with:
       dsn: ${{ secrets.SCOPE_DSN }}
       path: path/to/test-reports
