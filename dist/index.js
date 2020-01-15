@@ -1679,8 +1679,8 @@ const core = __importStar(__webpack_require__(310));
 const exec = __importStar(__webpack_require__(230));
 const tc = __importStar(__webpack_require__(602));
 const io = __importStar(__webpack_require__(954));
-const IS_WINDOWS = process.platform === 'win32';
-const IS_MACOS = process.platform === 'darwin';
+const IS_WINDOWS = process.platform === "win32";
+const IS_MACOS = process.platform === "darwin";
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -1689,7 +1689,9 @@ function run() {
             let pathVar = core.getInput("path", { required: true });
             const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
             let scopeImportToolPath;
-            scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" + platform + "/x86_64");
+            scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" +
+                platform +
+                "/x86_64");
             if (IS_WINDOWS && !scopeImportToolPath.endsWith(".exe")) {
                 yield io.mv(scopeImportToolPath, scopeImportToolPath + ".exe");
                 scopeImportToolPath = scopeImportToolPath + ".exe";
