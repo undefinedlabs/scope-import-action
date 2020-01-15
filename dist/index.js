@@ -1694,7 +1694,9 @@ function run() {
                 yield io.mv(scopeImportToolPath, scopeImportToolPath + ".exe");
                 scopeImportToolPath = scopeImportToolPath + ".exe";
             }
-            yield exec.exec("ls -la /home/runner/work/_temp");
+            else {
+                yield exec.exec("chmod +x " + scopeImportToolPath);
+            }
             yield exec.exec(scopeImportToolPath + " --path " + pathVar);
         }
         catch (error) {

@@ -21,9 +21,9 @@ async function run() {
         if(IS_WINDOWS && !scopeImportToolPath.endsWith(".exe")) {
             await io.mv(scopeImportToolPath, scopeImportToolPath+".exe");
             scopeImportToolPath = scopeImportToolPath + ".exe";
+        } else {
+            await exec.exec("chmod +x " + scopeImportToolPath);
         }
-
-        await exec.exec("ls -la /home/runner/work/_temp");
         await exec.exec(scopeImportToolPath + " --path "+pathVar);
 
     } catch (error) {
