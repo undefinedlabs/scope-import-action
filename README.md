@@ -2,7 +2,7 @@
 
 # Scope Import Action
 
-GitHub Action to import your tests reports to [Scope](https://scope.dev)
+GitHub Action to import your test reports to [Scope](https://scope.dev)
 
 ## About Scope
 
