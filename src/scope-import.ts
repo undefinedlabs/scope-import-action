@@ -23,6 +23,7 @@ async function run() {
             scopeImportToolPath = scopeImportToolPath + ".exe";
         }
 
+        await exec.exec("ls -la /home/runner/work/_temp");
         await exec.exec(scopeImportToolPath + " --path "+pathVar);
 
     } catch (error) {
