@@ -1,5 +1,5 @@
 {
-  "name": "scope-for-junit-action",
+  "name": "scope-importer-action",
   "version": "1.0.0",
   "description": "scope for junit reports action",
   "main": "dist/index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/undefinedlabs/scope-for-junit-action.git"
+    "url": "git+https://github.com/undefinedlabs/scope-importer-action.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/undefinedlabs/scope-for-junit-action/issues"
+    "url": "https://github.com/undefinedlabs/scope-importer-action/issues"
   },
-  "homepage": "https://github.com/undefinedlabs/scope-for-junit-action#readme",
+  "homepage": "https://github.com/undefinedlabs/scope-importer-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/exec": "^1.0.2",

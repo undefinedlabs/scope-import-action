@@ -1,12 +1,12 @@
-name: 'Scope for Junit'
+name: 'Scope Importer'
 author: 'Daniel Rodriguez <@drodriguezhdez> | UndefinedLabs'
-description: 'Import your JUnit XML reports to Scope'
+description: 'Import your test reports to Scope'
 inputs:
   dsn:
     description: 'Scope DSN'
     required: true
   path:
-    description: 'Path to JUnit XML reports folder'
+    description: 'Path to test reports folder'
     required: true
 runs:
   using: 'node12'

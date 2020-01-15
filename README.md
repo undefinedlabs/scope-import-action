@@ -1,8 +1,8 @@
 ![logo](scope_logo.svg)
 
-# Scope for JUnit Action
+# Scope Importer Action
 
-GitHub Action to import your JUnit XML reports to [Scope](https://scope.dev)
+GitHub Action to import your tests reports to [Scope](https://scope.dev)
 
 ## About Scope
 
@@ -14,8 +14,8 @@ GitHub Action to import your JUnit XML reports to [Scope](https://scope.dev)
 2. Add a step to your GitHub Actions workflow YAML that uses this action:
 
 ```yml
-  - name: Scope JUnit
-    uses: undefinedlabs/scope-for-junit-action@v1
+  - name: Scope Importer
+    uses: undefinedlabs/scope-importer-action@v1
     with:
       dsn: ${{ secrets.SCOPE_DSN }}
       path: path/to/test-reports
