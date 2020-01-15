@@ -1,20 +1,11 @@
 import * as path from "path";
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
+import * as tc from '@actions/tool-cache';
+import * as io from '@actions/io';
 
 const IS_WINDOWS = process.platform === 'win32';
-let tempDirectory = process.env['RUNNER_TEMP'] || '';
-
-if (!tempDirectory) {
-    let baseLocation;
-    if (IS_WINDOWS) {
-        // On windows use the USERPROFILE env variable
-        baseLocation = process.env['USERPROFILE'] || 'C:\\';
-    } else {
-        baseLocation = (process.platform==='darwin') ? '/Users':'/home'
-    }
-    tempDirectory = path.join(baseLocation, 'actions', 'temp');
-}
+const IS_MACOS = process.platform === 'darwin';
 
 async function run() {
 
@@ -23,13 +14,16 @@ async function run() {
         await core.exportVariable("SCOPE_DSN", dsn);
 
         let pathVar = core.getInput("path", {required: true});
+        const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
 
-        await core.exportVariable("GOBIN", tempDirectory);
-        await exec.exec("go get github.com/undefinedlabs/scope-junit");
-        await exec.exec("go install github.com/undefinedlabs/scope-junit");
+        let scopeImportToolPath;
+        scopeImportToolPath = await tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/"+platform+"/x86_64");
+        if(IS_WINDOWS && !scopeImportToolPath.endsWith(".exe")) {
+            await io.mv(scopeImportToolPath, scopeImportToolPath+".exe");
+            scopeImportToolPath = scopeImportToolPath + ".exe";
+        }
 
-        const scopeJUnitTool = (IS_WINDOWS) ? "scope-junit.exe":"scope-junit";
-        await exec.exec(tempDirectory+"/"+scopeJUnitTool+" --path "+pathVar);
+        await exec.exec(scopeImportToolPath + " --path "+pathVar);
 
     } catch (error) {
         core.setFailed(error.message);
