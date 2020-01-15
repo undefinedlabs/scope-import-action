@@ -1,29 +1,30 @@
 {
-  "name": "scope-importer-action",
+  "name": "scope-import-action",
   "version": "1.0.0",
-  "description": "scope for junit reports action",
+  "description": "scope for test reports action",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "release": "ncc build lib/scope-for-junit.js",
+    "release": "ncc build lib/scope-import.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/undefinedlabs/scope-importer-action.git"
+    "url": "git+https://github.com/undefinedlabs/scope-import-action.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/undefinedlabs/scope-importer-action/issues"
+    "url": "https://github.com/undefinedlabs/scope-import-action/issues"
   },
-  "homepage": "https://github.com/undefinedlabs/scope-importer-action#readme",
+  "homepage": "https://github.com/undefinedlabs/scope-import-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@actions/exec": "^1.0.2",
-    "@actions/tool-cache": "^1.1.2",
+    "@actions/io": "^1.0.2",
+    "@actions/tool-cache": "^1.3.0",
     "@types/node": "^12.12.17"
   }
 }
