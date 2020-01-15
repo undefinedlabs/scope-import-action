@@ -1,4 +1,4 @@
-name: 'Scope Importer'
+name: 'Scope Import'
 author: 'Daniel Rodriguez <@drodriguezhdez> | UndefinedLabs'
 description: 'Import your test reports to Scope'
 inputs:
