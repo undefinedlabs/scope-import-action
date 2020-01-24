@@ -8,6 +8,12 @@ GitHub Action to import your tests reports to [Scope](https://scope.dev)
 
 [Scope](https://scope.dev) gives developers production-level visibility on every test for every app – spanning mobile, monoliths, and microservices.
 
+## Compatibility
+
+The Scope Import tool is compatible with the following test reports:
+
+* [JUnit XML Reports](https://github.com/junit-team/junit5/blob/master/platform-tests/src/test/resources/jenkins-junit.xsd)
+
 ## Usage
 
 1. Set Scope DSN inside Settings > Secrets as `SCOPE_DSN`.
