@@ -1,8 +1,8 @@
 ![logo](scope_logo.svg)
 
-# Scope Importer Action
+# Scope Import Action
 
-GitHub Action to import your tests reports to [Scope](https://scope.dev)
+GitHub Action to import your test reports to [Scope](https://scope.dev)
 
 ## About Scope
 
@@ -20,7 +20,7 @@ The Scope Import tool is compatible with the following test reports:
 2. Add a step to your GitHub Actions workflow YAML that uses this action:
 
 ```yml
-  - name: Scope Importer
+  - name: Scope Import
     uses: undefinedlabs/scope-import-action@v1
     with:
       dsn: ${{ secrets.SCOPE_DSN }}
