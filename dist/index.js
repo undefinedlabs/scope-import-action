@@ -1686,7 +1686,7 @@ function run() {
         try {
             let dsn = core.getInput("dsn", { required: true });
             yield core.exportVariable("SCOPE_DSN", dsn);
-            let pathVar = core.getInput("path", { required: true }).replace(/\n/g, " ");
+            const pathVar = core.getInput("path", { required: true }).replace(/[\r\n]/gm, " ");
             const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
             let scopeImportToolPath;
             scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" +
