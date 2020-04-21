@@ -12,7 +12,8 @@ async function run() {
     let dsn = core.getInput("dsn", { required: true });
     await core.exportVariable("SCOPE_DSN", dsn);
 
-    let pathVar = core.getInput("path", { required: true });
+    let pathVar = core.getInput("path", { required: true }).replace(/\n/g, " ");
+
     const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
 
     let scopeImportToolPath;
@@ -27,7 +28,7 @@ async function run() {
     } else {
       await exec.exec("chmod +x " + scopeImportToolPath);
     }
-    await exec.exec(scopeImportToolPath + " --path " + pathVar);
+    await exec.exec(scopeImportToolPath + " " + pathVar);
   } catch (error) {
     core.setFailed(error.message);
   }

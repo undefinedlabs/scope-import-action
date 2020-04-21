@@ -1686,7 +1686,7 @@ function run() {
         try {
             let dsn = core.getInput("dsn", { required: true });
             yield core.exportVariable("SCOPE_DSN", dsn);
-            let pathVar = core.getInput("path", { required: true });
+            let pathVar = core.getInput("path", { required: true }).replace(/\n/g, " ");
             const platform = IS_WINDOWS ? "windows" : IS_MACOS ? "darwin" : "linux";
             let scopeImportToolPath;
             scopeImportToolPath = yield tc.downloadTool("https://home.undefinedlabs.com/download/scope-import/" +
@@ -1699,7 +1699,7 @@ function run() {
             else {
                 yield exec.exec("chmod +x " + scopeImportToolPath);
             }
-            yield exec.exec(scopeImportToolPath + " --path " + pathVar);
+            yield exec.exec(scopeImportToolPath + " " + pathVar);
         }
         catch (error) {
             core.setFailed(error.message);
