@@ -24,5 +24,7 @@ The Scope Import tool is compatible with the following test reports:
     uses: undefinedlabs/scope-import-action@v1
     with:
       dsn: ${{ secrets.SCOPE_DSN }}
-      path: path/to/test-reports
+      path: |
+        path/to/test-reports01
+        path/to/test-reports02
 ```
